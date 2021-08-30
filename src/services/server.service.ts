@@ -4,6 +4,7 @@ import express from 'express';
 import { MongooseConect } from '../database/config';
 import routerCompany from '../routes/company.route';
 import routerCompanyAccess from '../routes/companyAccess.route';
+import routerProyect from '../routes/proyect.route';
 import routerUser from '../routes/user.route';
 
 export class Server {
@@ -16,7 +17,8 @@ export class Server {
         this._path = {
             user: '/api/user',
             company: '/api/company',
-            companyAccess: '/api/companyAccess'
+            companyAccess: '/api/companyAccess',
+            proyect: '/api/proyect'
         }
 
         //Mongo conection
@@ -41,6 +43,7 @@ export class Server {
         this._app.use(this._path.user, routerUser);
         this._app.use(this._path.company, routerCompany);
         this._app.use(this._path.companyAccess, routerCompanyAccess);
+        this._app.use(this._path.proyect, routerProyect);
     }
 
     listen() {
