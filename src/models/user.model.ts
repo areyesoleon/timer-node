@@ -23,7 +23,8 @@ const UserSchema: Schema = new Schema({
     },
     email: {
         type: String,
-        required: [true, 'El correo es obligatorio']
+        required: [true, 'El correo es obligatorio'],
+        unique: true
     },
     password: {
         type: String,
