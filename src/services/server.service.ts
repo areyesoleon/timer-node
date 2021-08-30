@@ -1,8 +1,9 @@
-import express from 'express';
 import { json } from 'body-parser';
-import { MongooseConect } from '../database/config';
 import cors from 'cors';
-import router from '../routes/user.route';
+import express from 'express';
+import { MongooseConect } from '../database/config';
+import routerCompany from '../routes/company.route';
+import routerUser from '../routes/user.route';
 
 export class Server {
     private _app;
@@ -12,7 +13,8 @@ export class Server {
         this._app = express();
         this._port = process.env.PORT;
         this._path = {
-            users: '/api/user'
+            user: '/api/user',
+            company: '/api/company'
         }
 
         //Mongo conection
@@ -34,7 +36,8 @@ export class Server {
     }
 
     private _routes() {
-        this._app.use(this._path.users, router);
+        this._app.use(this._path.user, routerUser);
+        this._app.use(this._path.company, routerCompany)
     }
 
     listen() {
