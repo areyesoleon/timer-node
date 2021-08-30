@@ -18,4 +18,11 @@ router.post('/',
         body('email').isEmail().withMessage('El correo no es un correo valido.'),
         body('email').custom(UserValidators.emailExist)
     ], UserController.post);
+
+router.put('/:id',
+    [
+        body('names').not().isEmpty().trim().escape().withMessage('Los nombres son obligatorios.'),
+        body('lastNames').not().isEmpty().trim().escape().withMessage('Los apellidos son obligatorios.'),
+        body('user').not().isEmpty().trim().escape().withMessage('El usuario es obligatorio.'),
+    ], UserController.put);
 export default router;

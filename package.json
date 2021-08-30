@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/mongoose": "^5.11.97",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.26.3",

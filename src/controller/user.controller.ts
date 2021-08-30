@@ -1,6 +1,7 @@
 import express, { request, response } from 'express';
 import { validationResult } from 'express-validator';
 import User from '../models/user.model';
+import bcryptjs from 'bcryptjs';
 
 export class UserController {
     static async get(req = request, res = response) {
@@ -23,19 +24,43 @@ export class UserController {
     static async post(req: express.Request, res = response) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array(), ok:false });
-          }
+            return res.status(400).json({ errors: errors.array(), ok: false });
+        }
         try {
             const { names, lastNames, user, email, password } = req.body;
-            const userDb = new User({ names, lastNames, user, email, password });
-            await userDb.save();
+            const body = new User({ names, lastNames, user, email, password });
+            const salt = bcryptjs.genSaltSync();
+            body.password = bcryptjs.hashSync(password, salt);
+            await body.save();
+            body.password = '';
             return res.json({
-                userDb,
+                body,
                 ok: true
             })
         } catch (error) {
-            console.log(error)
+            return res.status(400).json({ errors: errors.array(), ok: false });
         }
-       
+    }
+
+
+    static async put(req: express.Request, res = response) {
+
+        const { id } = req.params;
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array(), ok: false });
+        }
+        try {
+            const body = req.body;
+            delete body.password;
+            delete body.email;
+            await User.findByIdAndUpdate(id, body)
+            return res.json({
+                body,
+                ok: true
+            })
+        } catch (error) {
+            return res.status(400).json({ errors: errors.array(), ok: false });
+        }
     }
 }
