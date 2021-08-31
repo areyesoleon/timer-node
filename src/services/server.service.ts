@@ -8,6 +8,7 @@ import routerCompany from '../routes/company.route';
 import routerCompanyAccess from '../routes/companyAccess.route';
 import routerProyect from '../routes/proyect.route';
 import routerTask from '../routes/task.route';
+import routerTaskDetail from '../routes/taskDetail.route';
 import routerUser from '../routes/user.route';
 
 export class Server {
@@ -24,7 +25,8 @@ export class Server {
             proyect: '/api/proyect',
             board: '/api/board',
             boardAccess: '/api/boardAccess',
-            task: '/api/task'
+            task: '/api/task',
+            taskDetail: '/api/taskDetail',
         }
 
         //Mongo conection
@@ -53,6 +55,7 @@ export class Server {
         this._app.use(this._path.board, routerBoard);
         this._app.use(this._path.boardAccess, routerBoardAccess);
         this._app.use(this._path.task, routerTask);
+        this._app.use(this._path.taskDetail, routerTaskDetail);
     }
 
     listen() {
