@@ -8,11 +8,11 @@ export interface ICompanyAccess extends Document {
 const CompanyAccessSchema: Schema = new Schema({
     idCompany: {
         type: String,
-        required: [true, 'El id de la emrpesa es obligatorio.']
+        required: [true, 'La emrpesa es obligatorio.']
     },
     idUser: {
         type: String,
-        required: [true, 'El id del usuario es obligatorio.']
+        required: [true, 'El usuario es obligatorio.']
     },
 });
 

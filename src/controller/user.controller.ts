@@ -1,7 +1,7 @@
+import bcryptjs from 'bcryptjs';
 import express, { request, response } from 'express';
 import { validationResult } from 'express-validator';
 import User from '../models/user.model';
-import bcryptjs from 'bcryptjs';
 
 export class UserController {
     static async get(req = request, res = response) {
@@ -27,8 +27,8 @@ export class UserController {
             return res.status(400).json({ errors: errors.array(), ok: false });
         }
         try {
-            const { names, lastNames, user, email, password } = req.body;
-            const body = new User({ names, lastNames, user, email, password });
+            const { password } = req.body;
+            const body = new User(req.body);
             const salt = bcryptjs.genSaltSync();
             body.password = bcryptjs.hashSync(password, salt);
             await body.save();

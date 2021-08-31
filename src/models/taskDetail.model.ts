@@ -13,7 +13,7 @@ const TaskDetailSchema: Schema = new Schema({
     },
     description: {
         type: String,
-        required: [true, 'La descripcion es obligatoria.']
+        required: [true, 'La descripción es obligatoria.']
     },
     done: {
         type: Boolean

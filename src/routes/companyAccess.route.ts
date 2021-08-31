@@ -10,8 +10,8 @@ routerCompanyAccess.get('/', CompanyAccessController.get);
 
 routerCompanyAccess.post('/',
     [
-        body('idCompany').not().isEmpty().trim().escape().withMessage('El id de la empresa es obligatorio.'),
-        body('idUser').not().isEmpty().trim().escape().withMessage('el id del usuario es obligatorio.'),
+        body('idCompany').not().isEmpty().trim().escape().withMessage('La empresa es obligatoria.'),
+        body('idUser').not().isEmpty().trim().escape().withMessage('El usuario es obligatorio.'),
     ], CompanyAccessController.post);
 
 routerCompanyAccess.delete('/:id', CompanyAccessController.delete);

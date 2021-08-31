@@ -27,8 +27,7 @@ export class CompanyAccessController {
             return res.status(400).json({ errors: errors.array(), ok: false });
         }
         try {
-            const { idCompany, idUser } = req.body;
-            const body = new CompanyAccess({ idCompany, idUser });
+            const body = new CompanyAccess(req.body);
             await body.save();
             return res.json({
                 body,

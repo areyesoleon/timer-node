@@ -29,7 +29,7 @@ const TaskSchema: Schema = new Schema({
     },
     description: {
         type: String,
-        required: [true, 'La descripcion es obligatorio.']
+        required: [true, 'La descripción es obligatoria.']
     },
     idState: {
         type: String,

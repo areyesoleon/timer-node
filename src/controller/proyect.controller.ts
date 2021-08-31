@@ -27,14 +27,6 @@ export class ProyectController {
             return res.status(400).json({ errors: errors.array(), ok: false });
         }
         try {
-            // const {
-            //     idCompany,
-            //     name,
-            //     minutes,
-            //     realMinutes,
-            //     initDate,
-            //     finishDate,
-            // } = req.body;
             const body = new Proyect(req.body);
             await body.save();
             return res.json({

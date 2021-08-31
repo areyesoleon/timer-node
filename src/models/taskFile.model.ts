@@ -12,7 +12,7 @@ const TaskFileSchema: Schema = new Schema({
     },
     url: {
         type: String,
-        required: [true, 'La url del archivo es obligatorio.']
+        required: [true, 'La url del archivo es obligatoria.']
     }
 });
 

@@ -14,7 +14,7 @@ export interface IBoard extends Document {
 const BoardSchema: Schema = new Schema({
     idProyect: {
         type: String,
-        required: [true, 'El proyecto es obligatorio']
+        required: [true, 'El proyecto es obligatorio.']
     },
     name: {
         type: String,
