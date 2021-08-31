@@ -3,6 +3,7 @@ import cors from 'cors';
 import express from 'express';
 import { MongooseConect } from '../database/config';
 import routerBoard from '../routes/board.route';
+import routerBoardAccess from '../routes/boardAccess.route';
 import routerCompany from '../routes/company.route';
 import routerCompanyAccess from '../routes/companyAccess.route';
 import routerProyect from '../routes/proyect.route';
@@ -20,7 +21,8 @@ export class Server {
             company: '/api/company',
             companyAccess: '/api/companyAccess',
             proyect: '/api/proyect',
-            board: '/api/board'
+            board: '/api/board',
+            boardAccess: '/api/boardAccess'
         }
 
         //Mongo conection
@@ -47,6 +49,7 @@ export class Server {
         this._app.use(this._path.companyAccess, routerCompanyAccess);
         this._app.use(this._path.proyect, routerProyect);
         this._app.use(this._path.board, routerBoard);
+        this._app.use(this._path.boardAccess, routerBoardAccess);
     }
 
     listen() {
