@@ -1,3 +1,4 @@
+import { AuthController } from './../controller/auth.controller';
 import { Router } from "express";
 import { body } from 'express-validator';
 import { UserController } from "../controller/user.controller";
@@ -25,4 +26,16 @@ router.put('/:id',
         body('lastNames').not().isEmpty().trim().escape().withMessage('Los apellidos son obligatorios.'),
         body('user').not().isEmpty().trim().escape().withMessage('El usuario es obligatorio.'),
     ], UserController.put);
+
+router.post('/login',
+    [
+        body('email').isEmail().withMessage('El correo no es un correo valido.'),
+        body('email').custom(UserValidators.emailExist),
+        body('password').isLength({ min: 8 }),
+    ], AuthController.login);
+
+    router.get('/auth',
+    [
+        UserValidators.validateJWT
+    ], AuthController.auth);
 export default router;

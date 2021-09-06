@@ -31,6 +31,7 @@ export class UserController {
             const body = new User(req.body);
             const salt = bcryptjs.genSaltSync();
             body.password = bcryptjs.hashSync(password, salt);
+            body.status = 0;
             await body.save();
             body.password = '';
             return res.json({

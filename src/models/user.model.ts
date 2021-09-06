@@ -5,7 +5,8 @@ export interface IUser extends Document {
     lastNames: string,
     user: string,
     email: string,
-    password: string
+    password: string,
+    status: number
 }
 
 const UserSchema: Schema = new Schema({
@@ -30,6 +31,9 @@ const UserSchema: Schema = new Schema({
         type: String,
         required: [true, 'La contraseña es obligatorio.']
     },
+    status: {
+        type: Number
+    }
 });
 
 
