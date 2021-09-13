@@ -1,6 +1,8 @@
 import express, { request, response } from 'express';
 import { validationResult } from 'express-validator';
 import Company from '../models/company.model';
+import CompanyAccess from '../models/companyAccess.model';
+
 
 
 export class CompanyController {
@@ -22,14 +24,19 @@ export class CompanyController {
     }
 
     static async post(req: express.Request, res = response) {
+        console.log(req.body);
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array(), ok: false });
         }
         try {
-            const { name } = req.body;
+            const { name, user } = req.body;
             const body = new Company({ name });
             await body.save();
+            const idUser = user._id;
+            const idCompany = body._id
+            const companyAccess = new CompanyAccess({ idCompany, idUser });
+            await companyAccess.save()
             return res.json({
                 body,
                 ok: true

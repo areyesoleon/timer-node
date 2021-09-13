@@ -49,7 +49,7 @@ export class UserValidators {
                         msg: 'Token no válido - usuario con estado: false'
                     })
                 }
-                req.body = user;
+                req.body.user = user;
                 next();
             });
             

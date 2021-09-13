@@ -1,7 +1,8 @@
 import bcryptjs from 'bcryptjs';
 import express, { request, response } from 'express';
 import { validationResult } from 'express-validator';
-import User from '../models/user.model';
+import { UserValidators } from '../helpers/user-validators.helper';
+import User, { IUser } from '../models/user.model';
 
 export class UserController {
     static async get(req = request, res = response) {
@@ -28,14 +29,17 @@ export class UserController {
         }
         try {
             const { password } = req.body;
-            const body = new User(req.body);
+            const user = new User(req.body);
             const salt = bcryptjs.genSaltSync();
-            body.password = bcryptjs.hashSync(password, salt);
-            body.status = 0;
-            await body.save();
-            body.password = '';
+            user.password = bcryptjs.hashSync(password, salt);
+            user.status = 0;
+            await user.save();
+            const token = await UserValidators.generateJWT(user.id);
+            user.password = '';
+            const body: IUser = user;
             return res.json({
-                body,
+                body: user.user,
+                token,
                 ok: true
             })
         } catch (error) {

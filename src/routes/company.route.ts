@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { body } from 'express-validator';
 import { CompanyController } from "../controller/company.controller";
+import { UserValidators } from "../helpers/user-validators.helper";
 
 
 
@@ -10,6 +11,7 @@ routerCompany.get('/', CompanyController.get);
 
 routerCompany.post('/',
     [
+        UserValidators.validateJWT,
         body('name').not().isEmpty().trim().escape().withMessage('El nombre es obligatorio.'),
     ], CompanyController.post);
 
