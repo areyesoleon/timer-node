@@ -19,7 +19,8 @@ export class CompanyController {
 
         return res.json({
             total,
-            body
+            body,
+            ok: true
         });
     }
 

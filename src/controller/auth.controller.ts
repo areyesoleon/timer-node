@@ -53,7 +53,7 @@ export class AuthController {
     }
 
     static async auth(req: express.Request, res = response) {
-        const token = await UserValidators.generateJWT(req.body._id);
+        const token = await UserValidators.generateJWT(req.body.user.id);
         res.json({
             body: req.body.user.user,
             token,
