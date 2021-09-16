@@ -8,6 +8,8 @@ import { UserValidators } from "../helpers/user-validators.helper";
 const routerCompany = Router();
 
 routerCompany.get('/', CompanyController.get);
+routerCompany.get('/:id', CompanyController.getId);
+
 
 routerCompany.post('/',
     [

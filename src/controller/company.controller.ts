@@ -24,6 +24,17 @@ export class CompanyController {
         });
     }
 
+    static async getId(req = request, res = response) {
+        const { id } = req.params;
+
+        const body = await Company.findById(id);
+
+        return res.json({
+            body,
+            ok: true
+        });
+    }
+
     static async post(req: express.Request, res = response) {
         console.log(req.body);
         const errors = validationResult(req);
