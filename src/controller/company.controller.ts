@@ -8,11 +8,10 @@ import CompanyAccess from '../models/companyAccess.model';
 export class CompanyController {
     static async get(req = request, res = response) {
         const { limite = 5, desde = 0 } = req.query;
-        const query = { estado: true };
 
         const [total, body] = await Promise.all([
-            Company.countDocuments(query),
-            Company.find(query)
+            Company.countDocuments(),
+            Company.find()
                 .skip(Number(desde))
                 .limit(Number(limite))
         ]);
@@ -36,14 +35,13 @@ export class CompanyController {
     }
 
     static async post(req: express.Request, res = response) {
-        console.log(req.body);
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array(), ok: false });
         }
         try {
-            const { name, user } = req.body;
-            const body = new Company({ name });
+            const { name, active, user } = req.body;
+            const body = new Company({ name, active });
             await body.save();
             const idUser = user._id;
             const idCompany = body._id
