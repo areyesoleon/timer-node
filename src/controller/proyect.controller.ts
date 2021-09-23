@@ -17,7 +17,8 @@ export class ProyectController {
 
         return res.json({
             total,
-            body
+            body,
+            ok: true
         });
     }
 
