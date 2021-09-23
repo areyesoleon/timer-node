@@ -24,7 +24,7 @@ const ProyectSchema: Schema = new Schema({
     realMinutes: {
         type: Number
     },
-    initeDate: {
+    initDate: {
         type: Date
     },
     finishDate: {

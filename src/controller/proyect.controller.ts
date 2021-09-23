@@ -27,7 +27,8 @@ export class ProyectController {
             return res.status(400).json({ errors: errors.array(), ok: false });
         }
         try {
-            const body = new Proyect(req.body);
+            const { name, idCompany, initDate, finishDate } = req.body;
+            const body = new Proyect({ name, idCompany, initDate, finishDate });
             await body.save();
             return res.json({
                 body,
